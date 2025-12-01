@@ -43,34 +43,36 @@ I built this platform to demonstrate how different agentic design patterns can w
 
 ### Setup
 
-1. **Clone or navigate to the project directory:**
+Getting started is pretty straightforward:
+
+1. **Navigate to the project directory:**
 ```bash
 cd research_platform
 ```
 
-2. **Install dependencies:**
+2. **Install the dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-3. **Set up environment variables:**
+3. **Set up your environment variables:**
 ```bash
 cp .env.example .env
 ```
 
-Edit `.env` and add your API keys:
+Then edit `.env` and add your API keys. You'll need at least the OpenAI key:
 ```
 OPENAI_API_KEY=your_openai_api_key_here
-TAVILY_API_KEY=your_tavily_api_key_here  # Optional
-SERPER_API_KEY=your_serper_api_key_here   # Optional (alternative to Tavily)
+TAVILY_API_KEY=your_tavily_api_key_here  # Optional - for web search
+SERPER_API_KEY=your_serper_api_key_here   # Optional - alternative to Tavily
 ```
 
-4. **Run the application:**
+4. **Start the application:**
 ```bash
 streamlit run frontend/streamlit_app.py
 ```
 
-The application will open in your browser at `http://localhost:8501`
+The app will automatically open in your browser at `http://localhost:8501`. If it doesn't, just navigate there manually.
 
 ## Usage
 
@@ -191,24 +193,27 @@ print(result["citations"])
 
 ## Troubleshooting
 
-### Common Issues
+If you run into issues, here are some common problems and how to fix them:
 
-1. **"OpenAI API key is required"**
-   - Make sure your `.env` file exists and contains `OPENAI_API_KEY`
+**"OpenAI API key is required"**
+- Make sure your `.env` file exists in the project root
+- Double-check that `OPENAI_API_KEY` is set correctly (no extra spaces or quotes)
+- Restart the Streamlit app after changing the `.env` file
 
-2. **"Web search not working"**
-   - Check if you have Tavily or Serper API key set
-   - Web search is optional - research can work with documents only
+**"Web search not working"**
+- Web search is completely optional - the platform works fine with just documents
+- If you want web search, you'll need either a Tavily or Serper API key
+- You can get a Tavily key from https://tavily.com or Serper from https://serper.dev
 
-3. **"PDF parsing failed"**
-   - Ensure PDF is not password-protected
-   - Try a different PDF file
-   - Check file is not corrupted
+**"PDF parsing failed"**
+- Make sure the PDF isn't password-protected
+- Try a different PDF file to see if it's file-specific
+- Very large PDFs might take longer or timeout
 
-4. **"Research takes too long"**
-   - This is normal - multiple agents need to process
-   - Complex queries take longer
-   - Check your API rate limits
+**"Research takes too long"**
+- This is normal - the platform uses multiple agents that need to process sequentially
+- Complex queries naturally take longer than simple ones
+- Check your OpenAI API rate limits if it's consistently slow
 
 ## Contributing
 
